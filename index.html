@@ -4,446 +4,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ujjwal Joshi. Building! Tinkering! Learning! Explore my projects and connect with me.">
     <title>Ujjwal Joshi</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
+            margin: 0;
+            background: #f8f6f1;
+            color: #252b24;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #fff;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            padding: 40px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 600;
-            color: #000;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #666;
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #000;
+            -webkit-font-smoothing: antialiased;
         }
 
         main {
-            padding: 60px 0;
+            width: min(100%, 560px);
+            margin: 0 auto;
+            padding: 80px 24px 56px;
         }
 
-        .section {
-            margin-bottom: 100px;
+        .profile {
+            text-align: center;
+            margin-bottom: 48px;
         }
 
-        .section:last-child {
-            margin-bottom: 0;
+        .profile::before {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 4px;
+            margin: 0 auto 24px;
+            border-radius: 2px;
+            background: #4f6545;
         }
 
         h1 {
-            font-size: 48px;
-            font-weight: 300;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: #000;
+            margin: 0 0 12px;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(38px, 9vw, 52px);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+        }
+
+        .bio {
+            margin: 0;
+            color: #62695e;
+            font-size: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 32px;
+        }
+
+        .social-links a {
+            display: grid;
+            grid-template-columns: 22px 1fr 22px;
+            align-items: center;
+            gap: 14px;
+            min-height: 60px;
+            padding: 16px 20px;
+            border: 1px solid #dedfd6;
+            border-radius: 12px;
+            background: #fffefa;
+            color: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: left;
+            box-shadow: 0 2px 3px #252b2404;
+            transition: border-color 160ms ease, background-color 160ms ease;
+        }
+
+        .social-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .social-arrow {
+            color: #62695e;
+            text-align: right;
+            font-size: 18px;
         }
 
         h2 {
-            font-size: 32px;
-            font-weight: 400;
-            margin-bottom: 30px;
-            color: #000;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 0 0 8px;
+            color: #62695e;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        h2::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #dedfd6;
+        }
+
+        .project-list {
+            display: grid;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .project-card {
+            display: block;
+            padding: 24px 8px;
+            border-bottom: 1px solid #dedfd6;
+            color: inherit;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            transition: background-color 160ms ease;
+        }
+
+        .project-list li:last-child .project-card {
+            border-bottom: 0;
+        }
+
+        .project-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
         }
 
         h3 {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color: #000;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.4;
         }
 
-        p {
-            font-size: 18px;
+        .project-arrow {
+            flex-shrink: 0;
+            color: #4f6545;
+            transition: transform 160ms ease;
+        }
+
+        .project-card p {
+            margin: 8px 0 0;
+            color: #62695e;
+            font-size: 14px;
             line-height: 1.7;
-            margin-bottom: 20px;
-            color: #555;
         }
 
-        .hero {
-            text-align: center;
-            padding: 80px 0;
+        .project-status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #eaece3;
+            color: #4a5743;
+            font-size: 12px;
+            font-weight: 500;
         }
 
-        .hero h1 {
-            font-size: 64px;
-            margin-bottom: 30px;
+        a.project-card:hover {
+            background: #efeee7;
         }
 
-        .hero p {
-            font-size: 24px;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
+        a.project-card:hover .project-arrow {
+            transform: translate(2px, -2px);
         }
 
-        .project-grid {
-            display: grid;
-            gap: 40px;
+        .social-links a:hover {
+            border-color: #4f6545;
+            background: #f0f3eb;
         }
 
-        .project-item {
-            padding: 40px 0;
-            border-bottom: 1px solid #eee;
+        a:focus-visible {
+            outline: 3px solid #4f6545;
+            outline-offset: 4px;
         }
 
-        .project-item:last-child {
-            border-bottom: none;
-        }
-
-        .project-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .project-description {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .project-link {
-            color: #000;
-            text-decoration: none;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #000;
-            padding-bottom: 2px;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-link:hover {
-            opacity: 0.7;
-        }
-
-        .blog-posts {
-            display: grid;
-            gap: 30px;
-        }
-
-        .blog-post {
-            padding: 30px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .blog-post:last-child {
-            border-bottom: none;
-        }
-
-        .blog-date {
-            font-size: 14px;
-            color: #999;
-            margin-bottom: 10px;
-        }
-
-        .blog-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .blog-excerpt {
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .read-more {
-            color: #000;
-            text-decoration: none;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        footer {
-            padding: 60px 0;
-            border-top: 1px solid #eee;
-            text-align: center;
-        }
-
-        .footer-content {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .footer-links a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: #000;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 20px;
+        @media (prefers-reduced-motion: reduce) {
+            .social-links a,
+            .project-card,
+            .project-arrow {
+                transition: none;
             }
 
-            h1 {
-                font-size: 36px;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .hero p {
-                font-size: 20px;
-            }
-
-            p {
-                font-size: 16px;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 10px;
+            a.project-card:hover .project-arrow {
+                transform: none;
             }
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
+        @media (max-width: 480px) {
+            main {
+                padding: 48px 20px 32px;
+            }
 
-        /* Hide sections initially for navigation */
-        .section {
-            display: none;
-        }
+            .profile {
+                margin-bottom: 40px;
+            }
 
-        .section.active {
-            display: block;
+            .project-card {
+                padding: 22px 4px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#home" class="logo">Ujjwal Joshi</a>
-                <ul class="nav-links">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#blog" class="nav-link">Blog</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <main>
-        <div class="container">
-            <!-- Home Section -->
-            <section id="home" class="section active">
-                <div class="hero">
-                    <h1>Building! Tinkering! Learning!</h1>
-                </div>
-                <div style="margin-top: 20px;">
-                    <p>A software engineer by profession.
-                        During my undergrad, I co-founded Eccentrics, where I organized educational workshops on topics ranging
-                        from cybersecurity to Photoshop and DIY electronics, promoting practical learning opportunities
-                        in a tier-3 city in India. While my studies mainly focused on computer science and software
-                        engineering, I also enjoy volunteering for causes, raising awareness, and working on side
-                        projects, which I share on my website. Outside of work, my interests range from the latest tech
-                        trends to startups. I could tell you all about it, but THAT definitely wouldn’t be a
-                        “length-limited” conversation!</p>
-                </div>
-            </section>
+        <header class="profile">
+            <h1>Ujjwal Joshi</h1>
+            <p class="bio">Building! Tinkering! Learning!</p>
+            <nav class="social-links" aria-label="Social links">
+                <a href="https://linkedin.com/in/ujjwaljoshi" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M5 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 9h4v12H3Zm6 0h4v1.5c.8-1.1 1.9-1.8 3.5-1.8 3.1 0 4.5 1.9 4.5 5.3v7h-4v-6.3c0-1.8-.6-2.7-1.9-2.7-1.4 0-2.1 1-2.1 2.7V21H9Z"/>
+                    </svg>
+                    <span>LinkedIn</span>
+                    <span class="social-arrow" aria-hidden="true">&nearr;</span>
+                </a>
+                <a href="https://github.com/joshiujjwal" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.68.08-.68 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.64 1.22 3.28.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.64 0c2.15-1.45 3.1-1.15 3.1-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.32-2.63 5.28-5.14 5.56.4.35.76 1.03.76 2.08v3.09c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z"/>
+                    </svg>
+                    <span>GitHub</span>
+                    <span class="social-arrow" aria-hidden="true">&nearr;</span>
+                </a>
+                <a href="https://x.com/_ujvl" target="_blank" rel="noopener noreferrer">
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.5 22H2.3l7.8-8.9L2.4 2h6.5l4.5 6.8ZM17.9 20h1.7L7.8 4H6Z"/>
+                    </svg>
+                    <span>X</span>
+                    <span class="social-arrow" aria-hidden="true">&nearr;</span>
+                </a>
+            </nav>
+        </header>
 
-            <!-- Projects Section -->
-            <section id="projects" class="section">
-                <h2>Selected Projects</h2>
-
-                <div class="project-grid">
-                    <div class="project-item">
-                        <h3 class="project-title">Stepwins</h3>
-                        <p class="project-description">big goals feel impossible until they're broken down; StepWins turns whatever you want to accomplish into small, time-boxed steps (think 15- or 30-minute wins) you can actually finish today, all completely private and offline, so every day ends with a win.</p>
-                        <a href="#" target="_blank" class="project-link">In Testflight ( Contact for demo )</a>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">Toolbook</h3>
-                        <p class="project-description">All internal tools/software a company runs on</p>
-                        <a href="https://joshiujjwal.github.io/toolbook" target="_blank" class="project-link">View Project</a>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">YTChannelTrust</h3>
-                        <p class="project-description">Check trust score/reviews ( coming soon ) for your recommended
-                            Youtube channel.</p>
-                        <a href="https://ytchanneltrust.vercel.app/" target="_blank" class="project-link">View
-                            Project</a>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">VerifyU</h3>
-                        <p class="project-description">A platform to verify other humans online identity with just one
-                            time codes.</p>
-                        <a href="https://verifyu-jade.vercel.app/" target="_blank" class="project-link">View Project</a>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">Placard</h3>
-                        <p class="project-description">AI powwered virtual closet to manage your wardrobe and get
-                            personalized outfit suggestions.</p>
-                        <a href="https://placard-liart.vercel.app/" target="_blank" class="project-link">View
-                            Project</a>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">Yournxtwatch</h3>
-                        <p class="project-description">Swipe through movies with friends and discover your next watch!
-                        </p>
-                        <a href="https://yournxtwatch.vercel.app/" target="_blank" class="project-link">View Project</a>
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">Event Website(Registration Mechanism)</h3>
-                        <p class="project-description">Registration portal using Google Spreadsheets as a backend
-                            database for form submissions. Integrated mail merge to send personalized event emails to
-                            attendees directly from the spreadsheet data.</p>
-                        <!-- <a href="#" class="project-link">View Project</a> -->
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">TwtTrnds</h3>
-                        <p class="project-description">Visualizes real-time Twitter trends on a Google Map, highlighting
-                            the top 10 trending locations with interactive markers. It also uses D3.js to display
-                            country-wise trend coverage and provides relevant tweets and suggestions based on top
-                            trends.</p>
-                        <!-- <a href="#" class="project-link">View Project</a> -->
-                    </div>
-
-                    <div class="project-item">
-                        <h3 class="project-title">Integrated Image Search</h3>
-                        <p class="project-description">Google Extension that enables you to search images from various
-                            search engines like Flickr , Getty , Bing.</p>
-                        <!-- <a href="#" class="project-link">View Project</a> -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- Blog Section -->
-            <section id="blog" class="section">
-                <h2>Thoughts & Writing & Learning (Coming Soon)</h2>
-
-                <!-- <div class="blog-posts">
-                    <article class="blog-post">
-                        <div class="blog-date">July 13, 2025</div>
-                        <h3 class="blog-title">The Future of Minimal Design</h3>
-                        <p class="blog-excerpt">Exploring how minimalism in design continues to evolve and adapt to changing user needs and technological capabilities.</p>
-                        <a href="#" class="read-more">Read More</a>
+        <section id="projects" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects</h2>
+            <ul class="project-list">
+                <li>
+                    <article class="project-card">
+                        <h3>Stepwins</h3>
+                        <p>Turn big goals into small, time-boxed wins you can finish today. Completely private and offline.</p>
+                        <span class="project-status">In TestFlight &middot; Contact me on LinkedIn for a demo</span>
                     </article>
-                </div> -->
-            </section>
-        </div>
+                </li>
+                <li>
+                    <a class="project-card" href="https://joshiujjwal.github.io/toolbook" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Toolbook</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>All the internal tools and software a company runs on, in one place.</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="project-card" href="https://ytchanneltrust.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>YTChannelTrust</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Check trust scores for your recommended YouTube channels. Reviews coming soon.</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="project-card" href="https://verifyu-jade.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>VerifyU</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Verify people's online identities with one-time codes.</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="project-card" href="https://placard-liart.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Placard</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>An AI-powered virtual closet with personalized outfit suggestions.</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="project-card" href="https://yournxtwatch.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Yournxtwatch</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Swipe through movies with friends and discover your next watch.</p>
+                    </a>
+                </li>
+                <li>
+                    <article class="project-card">
+                        <h3>Event Website</h3>
+                        <p>An event registration portal using Google Spreadsheets and mail merge for personalized attendee emails.</p>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-card">
+                        <h3>TwtTrnds</h3>
+                        <p>Explore real-time Twitter trends on an interactive map, with country-wise coverage and relevant tweets.</p>
+                    </article>
+                </li>
+                <li>
+                    <article class="project-card">
+                        <h3>Integrated Image Search</h3>
+                        <p>A browser extension to search images across Flickr, Getty, and Bing.</p>
+                    </article>
+                </li>
+            </ul>
+        </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="https://twitter.com/_ujvl" target="_blank">Twitter</a>
-                <a href="https://linkedin.com/in/ujjwaljoshi" target="_blank">LinkedIn</a>
-                <a href="https://github.com/joshiujjwal" target="_blank">GitHub</a>
-            </div>
-            <div class="footer-content">
-                <p>&copy; 2025 Ujjwal Joshi. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Simple navigation functionality
-        document.addEventListener('DOMContentLoaded', function () {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.section');
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-
-                    // Remove active class from all nav links
-                    navLinks.forEach(navLink => navLink.classList.remove('active'));
-
-                    // Add active class to clicked link
-                    this.classList.add('active');
-
-                    // Hide all sections
-                    sections.forEach(section => section.classList.remove('active'));
-
-                    // Show target section
-                    const targetSection = document.querySelector(this.getAttribute('href'));
-                    if (targetSection) {
-                        targetSection.classList.add('active');
-                    }
-                });
-            });
-        });
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
                 m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-72656778-1', 'auto');
         ga('send', 'pageview');
-
     </script>
-
 </body>
 
 </html>
