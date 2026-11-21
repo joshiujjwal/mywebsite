@@ -113,6 +113,95 @@
             background: #dedfd6;
         }
 
+        .projects-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .projects-toolbar h2 {
+            margin: 0;
+        }
+
+        .projects-toolbar h2::after {
+            display: none;
+        }
+
+        .projects-toolbar::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #dedfd6;
+        }
+
+        .project-filters {
+            margin: 0;
+        }
+
+        .project-filters[hidden],
+        .project-list li[hidden] {
+            display: none;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 4px;
+        }
+
+        .filter-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            min-height: 44px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #737a6e;
+            font: inherit;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .filter-button:hover,
+        .filter-button[aria-pressed="true"] {
+            color: #252b24;
+        }
+
+        .filter-button[aria-pressed="true"] svg {
+            stroke-width: 2.5;
+        }
+
+        .filter-button:focus-visible {
+            outline: none;
+        }
+
+        .filter-button:focus-visible::after {
+            content: "";
+            position: absolute;
+            bottom: 6px;
+            width: 18px;
+            height: 2px;
+            background: currentColor;
+        }
+
+        .filter-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .filter-status {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
         .project-list {
             display: grid;
             margin: 0;
@@ -130,7 +219,7 @@
             transition: background-color 160ms ease;
         }
 
-        .project-list li:last-child .project-card {
+        .project-list li:nth-last-child(1 of :not([hidden])) .project-card {
             border-bottom: 0;
         }
 
@@ -161,15 +250,29 @@
             line-height: 1.7;
         }
 
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .project-tag,
         .project-status {
             display: inline-block;
-            margin-top: 12px;
             padding: 4px 10px;
             border-radius: 6px;
             background: #eaece3;
             color: #4a5743;
             font-size: 12px;
             font-weight: 500;
+        }
+
+        .project-status {
+            margin-top: 12px;
+            background: transparent;
+            padding: 0;
+            color: #62695e;
         }
 
         a.project-card:hover {
@@ -185,7 +288,8 @@
             background: #f0f3eb;
         }
 
-        a:focus-visible {
+        a:focus-visible,
+        button:focus-visible {
             outline: 3px solid #4f6545;
             outline-offset: 4px;
         }
@@ -249,81 +353,238 @@
         </header>
 
         <section id="projects" aria-labelledby="projects-heading">
-            <h2 id="projects-heading">Projects</h2>
-            <ul class="project-list">
-                <li>
-                    <article class="project-card">
-                        <h3>Stepwins</h3>
-                        <p>Turn big goals into small, time-boxed wins you can finish today. Completely private and offline.</p>
-                        <span class="project-status">In TestFlight &middot; Contact me on LinkedIn for a demo</span>
-                    </article>
+            <div class="projects-toolbar">
+                <h2 id="projects-heading">Projects</h2>
+                <div class="project-filters" id="project-filters" hidden>
+                    <div class="filter-buttons" role="group" aria-label="Filter projects">
+                        <button class="filter-button" type="button" data-filter="all" aria-label="All projects" title="All projects" aria-pressed="true" aria-controls="project-list">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+                                <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+                            </svg>
+                        </button>
+                        <button class="filter-button" type="button" data-filter="app" aria-label="Apps" title="Apps" aria-pressed="false" aria-controls="project-list">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false">
+                                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                <path d="M3 9h18M7 6.5h.01M10 6.5h.01"/>
+                            </svg>
+                        </button>
+                        <button class="filter-button" type="button" data-filter="whatif" aria-label="What if" title="What if" aria-pressed="false" aria-controls="project-list">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                <path d="M9 17h6v-2c0-1.5 3-3 3-6a6 6 0 0 0-12 0c0 3 3 4.5 3 6ZM9 20h6M11 23h2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="filter-status" role="status"></p>
+                </div>
+            </div>
+            <ul class="project-list" id="project-list">
+                <li data-category="whatif" data-repo="home-trash-future">
+                    <a class="project-card" href="https://joshiujjwal.github.io/home-trash-future/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Home Trash Future</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>What could the future of household trash look like? Exploring effort, habits, infrastructure, and where AI or robotics might help&mdash;not a proposed solution.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">What if</span>
+                            <span class="project-tag">Open question</span>
+                        </div>
+                    </a>
                 </li>
-                <li>
+                <li data-category="app" data-repo="topic-immersion">
+                    <a class="project-card" href="https://joshiujjwal.github.io/topic-immersion/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Topic Immersion</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Learn a subject from the ground up with curated books, videos, courses, podcasts, and communities.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Learning guide</span>
+                        </div>
+                    </a>
+                </li>
+                <li data-category="app" data-repo="njdmv">
+                    <a class="project-card" href="https://joshiujjwal.github.io/njdmv/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>NJ Knowledge Test Practice</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Practice for the New Jersey driving knowledge test with manual-based questions, explanations, and mock exams. No account or tracking.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Study</span>
+                        </div>
+                    </a>
+                </li>
+                <li data-category="app" data-repo="berkshire-letter-explorer">
+                    <a class="project-card" href="https://joshiujjwal.github.io/berkshire-letter-explorer/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Berkshire Letter Explorer</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Explore shareholder-letter summaries, lessons, and a sourced comparison of Berkshire Hathaway and S&amp;P 500 returns.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Research tool</span>
+                            <span class="project-tag">Data visualization</span>
+                        </div>
+                    </a>
+                </li>
+                <li data-category="app" data-repo="mcu-graph">
+                    <a class="project-card" href="https://mcu-graph.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>MCU Graph</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>Explore the Marvel Cinematic Universe through an interactive graph of characters, films, teams, and powers.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Interactive graph</span>
+                        </div>
+                    </a>
+                </li>
+                <li data-category="app" data-repo="toolbook">
                     <a class="project-card" href="https://joshiujjwal.github.io/toolbook" target="_blank" rel="noopener noreferrer">
                         <div class="project-heading">
                             <h3>Toolbook</h3>
                             <span class="project-arrow" aria-hidden="true">&nearr;</span>
                         </div>
-                        <p>All the internal tools and software a company runs on, in one place.</p>
+                        <p>See the software a public company uses by department, with confirmed and inferred data clearly marked.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Research tool</span>
+                        </div>
                     </a>
                 </li>
-                <li>
+                <li data-category="app" data-repo="stepwise">
+                    <article class="project-card">
+                        <h3>Stepwins</h3>
+                        <p>Turn big goals into small, time-boxed wins you can finish today. Completely private and offline.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Productivity</span>
+                        </div>
+                        <span class="project-status">In TestFlight &middot; Contact me on LinkedIn for a demo</span>
+                    </article>
+                </li>
+                <li data-category="app" data-repo="ytchanneltrust">
                     <a class="project-card" href="https://ytchanneltrust.vercel.app/" target="_blank" rel="noopener noreferrer">
                         <div class="project-heading">
                             <h3>YTChannelTrust</h3>
                             <span class="project-arrow" aria-hidden="true">&nearr;</span>
                         </div>
                         <p>Check trust scores for your recommended YouTube channels. Reviews coming soon.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Trust tool</span>
+                        </div>
                     </a>
                 </li>
-                <li>
+                <li data-category="app" data-repo="verifyu">
                     <a class="project-card" href="https://verifyu-jade.vercel.app/" target="_blank" rel="noopener noreferrer">
                         <div class="project-heading">
                             <h3>VerifyU</h3>
                             <span class="project-arrow" aria-hidden="true">&nearr;</span>
                         </div>
                         <p>Verify people's online identities with one-time codes.</p>
-                    </a>
-                </li>
-                <li>
-                    <a class="project-card" href="https://placard-liart.vercel.app/" target="_blank" rel="noopener noreferrer">
-                        <div class="project-heading">
-                            <h3>Placard</h3>
-                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Identity verification</span>
                         </div>
-                        <p>An AI-powered virtual closet with personalized outfit suggestions.</p>
                     </a>
                 </li>
-                <li>
+                <li data-category="app" data-repo="yournxtwatch">
                     <a class="project-card" href="https://yournxtwatch.vercel.app/" target="_blank" rel="noopener noreferrer">
                         <div class="project-heading">
                             <h3>Yournxtwatch</h3>
                             <span class="project-arrow" aria-hidden="true">&nearr;</span>
                         </div>
                         <p>Swipe through movies with friends and discover your next watch.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Movie discovery</span>
+                        </div>
                     </a>
                 </li>
-                <li>
-                    <article class="project-card">
-                        <h3>Event Website</h3>
-                        <p>An event registration portal using Google Spreadsheets and mail merge for personalized attendee emails.</p>
-                    </article>
-                </li>
-                <li>
-                    <article class="project-card">
-                        <h3>TwtTrnds</h3>
-                        <p>Explore real-time Twitter trends on an interactive map, with country-wise coverage and relevant tweets.</p>
-                    </article>
-                </li>
-                <li>
-                    <article class="project-card">
-                        <h3>Integrated Image Search</h3>
-                        <p>A browser extension to search images across Flickr, Getty, and Bing.</p>
-                    </article>
+                <li data-category="app" data-repo="placard">
+                    <a class="project-card" href="https://placard-liart.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="project-heading">
+                            <h3>Placard</h3>
+                            <span class="project-arrow" aria-hidden="true">&nearr;</span>
+                        </div>
+                        <p>An AI-powered virtual closet with personalized outfit suggestions.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">App</span>
+                            <span class="project-tag">Virtual closet</span>
+                        </div>
+                    </a>
                 </li>
             </ul>
+            <template id="archived-projects">
+                <ul>
+                    <li>
+                        <article class="project-card">
+                            <h3>Event Website</h3>
+                            <p>An event registration portal using Google Spreadsheets and mail merge for personalized attendee emails.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web app</span>
+                                <span class="project-tag">Archived</span>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="project-card">
+                            <h3>TwtTrnds</h3>
+                            <p>Explore real-time Twitter trends on an interactive map, with country-wise coverage and relevant tweets.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Data visualization</span>
+                                <span class="project-tag">Archived</span>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article class="project-card">
+                            <h3>Integrated Image Search</h3>
+                            <p>A browser extension to search images across Flickr, Getty, and Bing.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Browser extension</span>
+                                <span class="project-tag">Archived</span>
+                            </div>
+                        </article>
+                    </li>
+                </ul>
+            </template>
         </section>
     </main>
+
+    <script>
+        const projectFilters = document.querySelector('.project-filters');
+        const filterButtons = projectFilters.querySelectorAll('.filter-button');
+        const projectItems = document.querySelectorAll('#project-list > li');
+        const filterStatus = projectFilters.querySelector('.filter-status');
+
+        function filterProjects(category) {
+            let count = 0;
+            projectItems.forEach(item => {
+                item.hidden = category !== 'all' && item.dataset.category !== category;
+                if (!item.hidden) count++;
+            });
+            filterButtons.forEach(button => {
+                button.setAttribute('aria-pressed', String(button.dataset.filter === category));
+            });
+            filterStatus.textContent = `${count} ${count === 1 ? 'project' : 'projects'}`;
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => filterProjects(button.dataset.filter));
+        });
+        filterProjects('all');
+        projectFilters.hidden = false;
+    </script>
 
     <script>
         (function (i, s, o, g, r, a, m) {
